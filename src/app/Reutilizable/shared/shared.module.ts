@@ -1,11 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-// Angular Material
+import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+
+//Componentes de angular material
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select'
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatGridListModule } from '@angular/material/grid-list';
@@ -33,10 +35,11 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
   imports: [
     CommonModule
   ],
-  exports: [
+  exports:[
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    HttpClientModule,
     MatCardModule,
     MatInputModule,
     MatSelectModule,
@@ -59,7 +62,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
     MatNativeDateModule,
     MomentDateModule
   ],
-  providers: [
+  providers:[
     MatDatepickerModule,
     MatNativeDateModule
   ]
