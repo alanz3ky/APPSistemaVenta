@@ -28,6 +28,8 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
     private _utilidadServicio: UtilidadService
   ) { }
 
+
+  //Obtener lista de usuarios
     obtenerUsuarios(){
 
       this._usuarioServicio.lista().subscribe({
@@ -42,27 +44,38 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
 
     }
 
+
+    //Llamada al metodo
   ngOnInit(): void {
     this.obtenerUsuarios();
   }
 
+
+  //inicializacion de la paginacion
   ngAfterViewInit(): void {
     this.dataListaUsuarios.paginator = this.paginacionTabla;
   }
+
+  //Método de filtrar
 
   aplicarFiltroTabla(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataListaUsuarios.filter = filterValue.trim().toLocaleLowerCase();
   }
 
+  //Metodo abrir el modal cuando el usuario crea un nuevo usuario
+
   nuevoUsuario(){
     this.dialog.open(ModalUsuarioComponent, {
+      //evita cerrar el modal si el usuario clicka fuera del modal
       disableClose:true
     }).afterClosed().subscribe(resultado =>{
       if(resultado === "true") this.obtenerUsuarios();
     });
   }
 
+
+  //Metodo editar usuario
   editarUsuario(usuario:Usuario){
     this.dialog.open(ModalUsuarioComponent, {
       disableClose:true,
@@ -71,6 +84,8 @@ export class UsuarioComponent implements OnInit, AfterViewInit {
       if(resultado === "true") this.obtenerUsuarios();
     });
   }
+
+  //metodo de eliminar con alerts
 
   eliminarUsuario(usuario:Usuario){
 

@@ -24,12 +24,12 @@ export class ModalUsuarioComponent implements OnInit {
 
   constructor(
     private modalActual: MatDialogRef<ModalUsuarioComponent>,
-    @Inject(MAT_DIALOG_DATA) public datosUsuario: Usuario,
+    @Inject(MAT_DIALOG_DATA) public datosUsuario: Usuario,  //Recibir informacion del usuario
     private fb: FormBuilder,
     private _rolServicio: RolService,
     private _usuarioServicio: UsuarioService,
     private _utilidadServicio: UtilidadService
-  ) { 
+  ) {
 
     this.formularioUsuario = this.fb.group({
       nombreCompleto : ['',Validators.required],
@@ -39,7 +39,7 @@ export class ModalUsuarioComponent implements OnInit {
       esActivo : ['1',Validators.required],
     });
 
-      if(this.datosUsuario != null){
+      if(this.datosUsuario != null){           //diferente de nulo tenemos informacion del usuario
 
         this.tituloAccion = "Editar";
         this.botonAccion = "Actualizar";
@@ -54,7 +54,7 @@ export class ModalUsuarioComponent implements OnInit {
 
   }
 
-  ngOnInit(): void {
+  ngOnInit(): void {                        //ngonininit = iniciio de componente
 
     if(this.datosUsuario != null){
 
@@ -85,6 +85,8 @@ export class ModalUsuarioComponent implements OnInit {
 
     if(this.datosUsuario == null){
 
+
+//Crear usuario
       this._usuarioServicio.guardar(_usuario).subscribe({
         next: (data) =>{
           if(data.status){
@@ -95,7 +97,7 @@ export class ModalUsuarioComponent implements OnInit {
         },
         error:(e) => {}
       })
-
+//Editar usuario
     }else{
 
       this._usuarioServicio.editar(_usuario).subscribe({
