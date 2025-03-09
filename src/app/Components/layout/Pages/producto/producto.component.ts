@@ -42,7 +42,6 @@ export class ProductoComponent implements OnInit, AfterViewInit{
       },
       error:(e) =>{}
     })
-
   }
 
   ngOnInit(): void {
@@ -57,14 +56,17 @@ export class ProductoComponent implements OnInit, AfterViewInit{
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataListaProductos.filter = filterValue.trim().toLocaleLowerCase();
   }
+  //Metodo abrir el modal cuando el usuario crea un nuevo producto
 
   nuevoProducto(){
     this.dialog.open(ModalProductoComponent, {
+            //evita cerrar el modal si el usuario clicka fuera del modal
       disableClose:true
     }).afterClosed().subscribe(resultado =>{
       if(resultado === "true") this.obtenerProductos();
     });
   }
+  //Metodo editar usuario
 
   editarProducto(producto:Producto){
     this.dialog.open(ModalProductoComponent, {
@@ -75,6 +77,7 @@ export class ProductoComponent implements OnInit, AfterViewInit{
     });
   }
 
+  //metodo de eliminar con alerts
 
   eliminarProducto(producto:Producto){
 

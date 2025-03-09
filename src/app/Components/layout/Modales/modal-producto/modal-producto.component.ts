@@ -28,7 +28,7 @@ export class ModalProductoComponent implements OnInit {
     private _categoriaServicio: CategoriaService,
     private _productoServicio: ProductoService,
     private _utilidadServicio: UtilidadService
-  ) { 
+  ) {
 
     this.formularioProducto = this.fb.group({
       nombre: ['',Validators.required],
