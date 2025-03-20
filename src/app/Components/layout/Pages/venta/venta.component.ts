@@ -45,7 +45,7 @@ export class VentaComponent implements OnInit {
     private _productoServicio: ProductoService,
     private _ventaServicio: VentaService,
     private _utilidadServicio: UtilidadService
-  ) { 
+  ) {
 
 
     this.formularioProductoVenta = this.fb.group({
@@ -53,7 +53,7 @@ export class VentaComponent implements OnInit {
       cantidad: ['',Validators.required]
     });
 
-    
+
     this._productoServicio.lista().subscribe({
       next: (data) => {
         if(data.status){
@@ -64,6 +64,7 @@ export class VentaComponent implements OnInit {
       error:(e) =>{}
     })
 
+ // devuelve un observable que se puede suscribir para escuchar los cambios en el valor del control.
     this.formularioProductoVenta.get('producto')?.valueChanges.subscribe(value => {
       this.listaProductosFiltro = this.retornarProductosPorFiltro(value);
     })
@@ -120,14 +121,17 @@ export class VentaComponent implements OnInit {
 
     if(this.listaProductosParaVenta.length > 0){
 
+      // bloquear el boton de registrar
       this.bloquearBotonRegistrar = true;
 
+
+      // Crear el objeto de venta
       const request: Venta = {
         tipoPago : this.tipodePagoPorDefecto,
         totalTexto : String(this.totalPagar.toFixed(2)),
         detalleVenta : this.listaProductosParaVenta
       }
-
+// se suscribe a un observable para escuchar los cambios en los valores de la respuesta.
       this._ventaServicio.registrar(request).subscribe({
         next: (response) =>{
           if(response.status){
