@@ -5,8 +5,11 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+//Importar libreria para manejo de fechas
 import * as moment from 'moment';
 
+
+//Importar libreria para exportar a Excel
 import * as XLSX from "xlsx"
 
 import { Reporte } from 'src/app/Interfaces/reporte';
@@ -65,6 +68,7 @@ export class ReporteComponent implements OnInit {
     const _fechaInicio = moment(this.formularioFiltro.value.fechaInicio).format('DD/MM/YYYY');
     const _fechaFin = moment(this.formularioFiltro.value.fechaFin).format('DD/MM/YYYY');
 
+    //Validar que las fechas sean validas
     if(_fechaInicio === "Invalid date" || _fechaFin === "Invalid date"){
       this._utilidadServicio.mostrarAlerta("Debe ingresar ambas fechas","Oops!")
       return;
@@ -89,7 +93,7 @@ export class ReporteComponent implements OnInit {
     })
 
   }
-
+//Exportar a Excel
   exportarExcel(){
     const wb = XLSX.utils.book_new();
     const ws = XLSX.utils.json_to_sheet(this.listaVentasReporte);
