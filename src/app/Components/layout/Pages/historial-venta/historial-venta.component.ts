@@ -6,7 +6,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatDialog } from '@angular/material/dialog';
 
 import { MAT_DATE_FORMATS } from '@angular/material/core';
-import * as moment from 'moment'; 
+import * as moment from 'moment';
 
 import { ModalDetalleVentaComponent } from '../../Modales/modal-detalle-venta/modal-detalle-venta.component';
 
@@ -52,6 +52,7 @@ export class HistorialVentaComponent implements OnInit, AfterViewInit {
     private _utilidadServicio: UtilidadService
   ) {
 
+    // Formulario de busqueda
     this.formularioBusqueda = this.fb.group({
       buscarPor: ['fecha'],
       numero : [''],
@@ -59,6 +60,7 @@ export class HistorialVentaComponent implements OnInit, AfterViewInit {
       fechaFin : ['']
     })
 
+    // Cambiar el valor de los campos
     this.formularioBusqueda.get("buscarPor")?.valueChanges.subscribe(value => {
       this.formularioBusqueda.patchValue({
         numero  : "",
@@ -77,11 +79,14 @@ export class HistorialVentaComponent implements OnInit, AfterViewInit {
     this.datosListaVenta.paginator = this.paginacionTabla;
   }
 
+  // Metodo para aplicar filtro a la tabla
   aplicarFiltroTabla(event: Event){
     const filterValue = (event.target as HTMLInputElement).value;
     this.datosListaVenta.filter = filterValue.trim().toLocaleLowerCase();
   }
 
+
+  // Metodo para buscar ventas
   buscarVentas(){
     let _fechaInicio : string ="";
     let _fechaFin : string ="";
@@ -96,6 +101,8 @@ export class HistorialVentaComponent implements OnInit, AfterViewInit {
       }
     }
 
+
+    // Consultar ventas
     this._ventaServicio.historial(
       this.formularioBusqueda.value.buscarPor,
       this.formularioBusqueda.value.numero,
@@ -114,6 +121,7 @@ export class HistorialVentaComponent implements OnInit, AfterViewInit {
     })
 
   }
+
 
   verDetalleVenta(_venta:Venta){
 
