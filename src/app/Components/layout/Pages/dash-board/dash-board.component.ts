@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
+//import { Chart } from 'chart.js';
 import { Chart,registerables } from 'chart.js';
 import { DashBoardService } from 'src/app/Services/dash-board.service';
+//Graficos de barras y lineas
 Chart.register(...registerables);
 
 @Component({
@@ -19,7 +20,7 @@ export class DashBoardComponent implements OnInit {
     private _dashboardServicio: DashBoardService
   ) { }
 
-
+//Metodo para mostrar el grafico
   mostrarGrafico(labelGrafico:any[],dataGrafico:any[]){
 
     const chartBarras = new Chart('chartBarras',{
@@ -54,6 +55,8 @@ export class DashBoardComponent implements OnInit {
 
   ngOnInit(): void {
 
+
+    //Llamamos al servicio resumen
     this._dashboardServicio.resumen().subscribe({
       next:(data) =>{
         if(data.status){
@@ -62,8 +65,8 @@ export class DashBoardComponent implements OnInit {
           this.totalProductos = data.value.totalProductos;
 
           const arrayData : any[] = data.value.ventasUltimaSemana;
-          
 
+          //Extraemos las fechas y los totales
           const labelTemp = arrayData.map((value) => value.fecha);
           const dataTemp = arrayData.map((value) => value.total);
           console.log(labelTemp,dataTemp);
