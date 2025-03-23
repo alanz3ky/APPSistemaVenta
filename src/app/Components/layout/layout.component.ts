@@ -26,14 +26,14 @@ export class LayoutComponent implements OnInit {
 
   ngOnInit(): void {
 
+    //Obtenemos el usuario de la sesion
     const usuario = this._utilidadServicio.obtenerSesionUsuario();
-
     if(usuario != null){
 
       this.correoUsuario = usuario.correo;
       this.rolUsuario = usuario.rolDescripcion;
 
-
+//Obtenemos los menus del usuario logueado
       this._menuServicio.lista(usuario.idUsuario).subscribe({
         next: (data) =>{
           if(data.status) this.listaMenus = data.value;
@@ -45,7 +45,7 @@ export class LayoutComponent implements OnInit {
 
   }
 
-
+//Metodo para cerrar sesion del usuario y redirigir al login
   cerrarSesion(){
     this._utilidadServicio.eliminarSesionUsuario();
     this.router.navigate(['login']);

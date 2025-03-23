@@ -12,6 +12,7 @@ Chart.register(...registerables);
 })
 export class DashBoardComponent implements OnInit {
 
+  //Variables para mostrar el resumen
   totalIngresos:string="0";
   totalVentas:string="0";
   totalProductos:string ="0";
